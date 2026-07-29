@@ -1,20 +1,23 @@
 twist_mux:
   ros__parameters:
-    topics:
-      - name: nav
+    subscribers:
+      nav:
         topic: cmd_vel_nav
         timeout: 0.5
         priority: 10
         short_desc: Nav2
 
-      - name: manual
+      manual:
         topic: cmd_vel_manual
         timeout: 0.5
         priority: 20
         short_desc: Dashboard Manual
 
     locks:
-      - name: manual_lock
+      manual_lock:
         topic: manual_override_lock
         timeout: 0.0
         priority: 255
+        short_desc: Manual override lock
+
+    output_topic: cmd_vel

@@ -23,7 +23,7 @@ def generate_launch_description():
         output='screen',
         parameters=[params_file, {'use_sim_time': True}],
         # Remap Nav2's velocity output to cmd_vel_nav so twist_mux (not Nav2) controls the real /cmd_vel
-        remappings=[('cmd_vel', 'cmd_vel_nav')]
+        remappings=[]
     )
 
     planner_server = Node(
