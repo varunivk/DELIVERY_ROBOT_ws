@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="warehouse">
+    <physics name="1ms" type="ignored">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-contact-system" name="gz::sim::systems::Contact"/>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <!-- Floor 10x8m -->
+    <model name="floor">
+      <static>true</static>
+      <link name="floor_link">
+        <collision name="collision"><geometry><box><size>10 8 0.05</size></box></geometry></collision>
+        <visual name="visual"><geometry><box><size>10 8 0.05</size></box></geometry>
+          <material><ambient>0.6 0.6 0.6 1</ambient><diffuse>0.6 0.6 0.6 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Perimeter walls -->
+    <model name="wall_north">
+      <static>true</static>
+      <pose>0 4 0.5 0 0 0</pose>
+      <link name="link"><collision name="c"><geometry><box><size>10 0.1 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>10 0.1 1.0</size></box></geometry></visual></link>
+    </model>
+    <model name="wall_south">
+      <static>true</static>
+      <pose>0 -4 0.5 0 0 0</pose>
+      <link name="link"><collision name="c"><geometry><box><size>10 0.1 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>10 0.1 1.0</size></box></geometry></visual></link>
+    </model>
+    <model name="wall_east">
+      <static>true</static>
+      <pose>5 0 0.5 0 0 0</pose>
+      <link name="link"><collision name="c"><geometry><box><size>0.1 8 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>0.1 8 1.0</size></box></geometry></visual></link>
+    </model>
+    <model name="wall_west">
+      <static>true</static>
+      <pose>-5 0 0.5 0 0 0</pose>
+      <link name="link"><collision name="c"><geometry><box><size>0.1 8 1.0</size></box></geometry></collision>
+      <visual name="v"><geometry><box><size>0.1 8 1.0</size></box></geometry></visual></link>
+    </model>
+
+    <!-- Shelf row 1 (forms Aisle 1) -->
+    <model name="shelf_row1">
+      <static>true</static>
+      <pose>-1.5 1.5 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>3 0.4 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>3 0.4 1.0</size></box></geometry>
+          <material><ambient>0.5 0.35 0.15 1</ambient><diffuse>0.5 0.35 0.15 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Shelf row 2 (forms Aisle 2) -->
+    <model name="shelf_row2">
+      <static>true</static>
+      <pose>1.5 -1.5 0.5 0 0 0</pose>
+      <link name="link">
+        <collision name="c"><geometry><box><size>3 0.4 1.0</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>3 0.4 1.0</size></box></geometry>
+          <material><ambient>0.5 0.35 0.15 1</ambient><diffuse>0.5 0.35 0.15 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- Movable obstacle box (forklift/person stand-in) -->
+    <model name="obstacle_box">
+      <pose>0 0 0.3 0 0 0</pose>
+      <link name="link">
+        <inertial><mass>5</mass><inertia><ixx>0.1</ixx><iyy>0.1</iyy><izz>0.1</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+        <collision name="c"><geometry><box><size>0.4 0.4 0.6</size></box></geometry></collision>
+        <visual name="v"><geometry><box><size>0.4 0.4 0.6</size></box></geometry>
+          <material><ambient>0.9 0.6 0.1 1</ambient><diffuse>0.9 0.6 0.1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+    <!-- ArUco marker planes at delivery points -->
+    <model name="marker_aisle1">
+      <static>true</static>
+      <pose>-1.5 2.3 0.4 1.5708 0 0</pose>
+      <link name="link">
+        <visual name="v"><geometry><plane><size>0.2 0.2</size></plane></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <model name="marker_aisle2">
+      <static>true</static>
+      <pose>1.5 -2.3 0.4 1.5708 0 0</pose>
+      <link name="link">
+        <visual name="v"><geometry><plane><size>0.2 0.2</size></plane></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+    <model name="marker_dock">
+      <static>true</static>
+      <pose>4.3 0 0.4 1.5708 0 1.5708</pose>
+      <link name="link">
+        <visual name="v"><geometry><plane><size>0.2 0.2</size></plane></geometry>
+          <material><ambient>1 1 1 1</ambient><diffuse>1 1 1 1</diffuse></material>
+        </visual>
+      </link>
+    </model>
+
+  </world>
+</sdf>

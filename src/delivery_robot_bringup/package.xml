@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>delivery_robot_bringup</name>
+  <version>0.0.1</version>
+  <description>Top-level launch: sim + nav2 + twist_mux + vision + manager + dashboard</description>
+  <maintainer email="you@example.com">student</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>delivery_robot_gazebo</exec_depend>
+  <exec_depend>delivery_robot_nav2</exec_depend>
+  <exec_depend>delivery_robot_teleop</exec_depend>
+  <exec_depend>delivery_robot_vision</exec_depend>
+  <exec_depend>delivery_robot_manager</exec_depend>
+  <exec_depend>delivery_robot_dashboard</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

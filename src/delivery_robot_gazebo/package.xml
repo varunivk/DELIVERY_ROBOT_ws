@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>delivery_robot_gazebo</name>
+  <version>0.0.1</version>
+  <description>Warehouse world and spawn launch for delivery robot</description>
+  <maintainer email="you@example.com">student</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+  <exec_depend>delivery_robot_description</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

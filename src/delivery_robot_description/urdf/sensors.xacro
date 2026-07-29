@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Camera: front-center, top -->
+  <link name="camera_link">
+    <visual>
+      <geometry><box size="0.02 0.04 0.02"/></geometry>
+      <material name="camera_red"/>
+    </visual>
+    <collision>
+      <geometry><box size="0.02 0.04 0.02"/></geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5"/>
+    </inertial>
+  </link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="chassis_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.15 0 0.06" rpy="0 0.15 0"/>
+  </joint>
+  <link name="camera_optical_link"/>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_optical_link"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+  </joint>
+
+  <!-- Ultrasonic macro -->
+  <xacro:macro name="ultrasonic" params="prefix x_pos y_pos yaw">
+    <link name="${prefix}_us_link">
+      <visual>
+        <geometry><cylinder radius="0.008" length="0.02"/></geometry>
+        <material name="sensor_blue"/>
+      </visual>
+      <collision>
+        <geometry><cylinder radius="0.008" length="0.02"/></geometry>
+      </collision>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </inertial>
+    </link>
+    <joint name="${prefix}_us_joint" type="fixed">
+      <parent link="chassis_link"/>
+      <child link="${prefix}_us_link"/>
+      <origin xyz="${x_pos} ${y_pos} 0.0" rpy="0 0 ${yaw}"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:ultrasonic prefix="front" x_pos="0.15"  y_pos="0.0"   yaw="0"/>
+  <xacro:ultrasonic prefix="rear"  x_pos="-0.15" y_pos="0.0"   yaw="3.1416"/>
+  <xacro:ultrasonic prefix="left"  x_pos="0.0"   y_pos="0.11"  yaw="1.5708"/>
+  <xacro:ultrasonic prefix="right" x_pos="0.0"   y_pos="-0.11" yaw="-1.5708"/>
+
+</robot>

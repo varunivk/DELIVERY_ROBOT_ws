@@ -1,0 +1,3 @@
+# Not a node param file -- see nav2_bringup.launch.py
+# static_transform_publisher args: x y z yaw pitch roll frame_id child_frame_id
+# map -> odom : identity transform (no lidar localization, odom treated as ground truth in sim)

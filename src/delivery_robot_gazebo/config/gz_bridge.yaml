@@ -1,0 +1,6 @@
+# Reference list of bridged topics (actual bridging done via arguments in spawn_robot.launch.py)
+# /cmd_vel        geometry_msgs/Twist   (ROS -> GZ)
+# /odom           nav_msgs/Odometry     (GZ -> ROS)
+# /tf             tf2_msgs/TFMessage    (GZ -> ROS)
+# /camera/image_raw  sensor_msgs/Image  (GZ -> ROS)
+# /ultrasonic_front,rear,left,right  sensor_msgs/LaserScan (GZ -> ROS)

@@ -1,0 +1,4 @@
+# NOT USED in this build (custom srv generation skipped to save build time).
+# Waypoint recording implemented instead via:
+#   /waypoint_name_to_record (std_msgs/String, published by dashboard BEFORE calling /record_waypoint)
+#   /record_waypoint (std_srvs/Trigger, appends current pose under that name)
