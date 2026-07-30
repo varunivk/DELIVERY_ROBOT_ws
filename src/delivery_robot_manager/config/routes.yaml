@@ -1,0 +1,37 @@
+locations:
+  dock:
+    x: 0.0
+    y: 0.0
+    yaw: 0.0
+    marker_id: 2
+
+  aisle1:
+    x: 1.5
+    y: -2.0
+    yaw: 0.0
+    marker_id: 0
+
+  aisle2:
+    x: 4.0
+    y: -2.0
+    yaw: 0.0
+    marker_id: 1
+
+routes:
+  dock_to_aisle1:
+    - dock
+    - aisle1
+
+  aisle1_to_aisle2:
+    - aisle1
+    - aisle2
+
+  aisle2_to_dock:
+    - aisle2
+    - dock
+
+  delivery_loop:
+    - dock
+    - aisle1
+    - aisle2
+    - dock

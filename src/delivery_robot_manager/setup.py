@@ -1,4 +1,6 @@
 from setuptools import setup
+from glob import glob
+import os
 
 package_name = 'delivery_robot_manager'
 
@@ -9,6 +11,8 @@ setup(
     data_files=[
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, 'launch'), glob('launch/*.launch.py')),
+        (os.path.join('share', package_name, 'config'), glob('config/*.yaml')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -19,6 +23,7 @@ setup(
     entry_points={
         'console_scripts': [
             'delivery_manager = delivery_robot_manager.delivery_manager:main',
+            'route_executor = delivery_robot_manager.route_executor:main',
         ],
     },
 )
